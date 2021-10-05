@@ -1,7 +1,6 @@
 <template>
     <div>
-        Hello Laravel + Vue
-        Template do Vue!
+        Este é um Template do Vue!
     </div>
 </template>
 
