@@ -9,7 +9,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
         
-        Route::get('/v1/serie', [SeriesController::class, 'index']);
+        Route::get('/v1/series', [SeriesController::class, 'index']);
 
     Route::prefix('/v1/serie')->group(function () {
         Route::post('/v1/serie', [SeriesController::class, 'store']);

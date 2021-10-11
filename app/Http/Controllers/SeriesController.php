@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Serie;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
@@ -13,7 +14,7 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        return 'Lista de séries';
+        return response(Serie::all(), 200);
     }
 
     /**
