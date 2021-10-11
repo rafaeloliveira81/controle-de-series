@@ -17,10 +17,6 @@ class SerieTest extends TestCase
      *
      * @return void
      */
-    /* public function test_example() */
-    /* { */
-    /*     $this->assertTrue(true); */
-    /* } */
 
     public function test_series_list_request_works()
     {
