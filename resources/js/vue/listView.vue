@@ -2,7 +2,7 @@
     <div>
         <div v-for="(serie, index) in series" :key="index">
             <list-item :serie="serie"
-                class="serie"/>
+                class="series"/>
         </div>
     </div>
 </template>
@@ -17,10 +17,11 @@ export default {
     
 </script>
 <style scoped>
-.serie {
-    background: #1E3D58;
-    padding: 5px;
-    margin-top: 5px;
+.series {
+  color: #E8EEF1;
+  background: #1E3D58;
+  align-content: center;
+  box-shadow: -2px 2px 4px 0px #111;
 }
 </style>
    
