@@ -9,7 +9,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
         
+<<<<<<< HEAD
     Route::get('/v1/serie', [SeriesController::class, 'index']);
+=======
+        Route::get('/v1/series', [SeriesController::class, 'index']);
+>>>>>>> d7b8b46388a6d75cc75a365983e64be2e9ce8635
 
     Route::prefix('/v1/serie')->group(function () {
         Route::post('/v1/serie', [SeriesController::class, 'store']);
