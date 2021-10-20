@@ -43,7 +43,7 @@ export default {
     width: 120px;
     margin: 2px 0;
     background: #E8EEF1;
-    color: #333;
+    color: #3dd;
     font-style: oblique;
     margin-left: auto;
     border-radius: 5px;

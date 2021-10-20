@@ -2142,7 +2142,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _listItem_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./listItem.vue */ "./resources/js/vue/listItem.vue");
+/* harmony import */ var _listItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./listItem */ "./resources/js/vue/listItem.vue");
 //
 //
 //
@@ -2155,7 +2155,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['series'],
   components: {
-    listItem: _listItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    listItem: _listItem__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -2232,7 +2232,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.series-container[data-v-27d9b80a] {\n    width: 50%;\n    margin: auto;\n}\n.heading[data-v-27d9b80a] {\n    font-family: \"Lucida Console\", Courier, monospace;\n    color: #1E3D58;\n    background-color: #E8EEF1;\n    padding: 10px;\n    margin-top: 30px;\n    border-color: #ccc;\n    border-radius: 5px;\n    box-shadow: 3px 3px 4px 0px #1E3D58;\n}\n#title[data-v-27d9b80a] {\n    text-align: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.series-container[data-v-27d9b80a] {\n  font-family: Titillium Web, sans-serif;\n  width: 60%;\n  padding: 3px 50px;\n  margin: auto;\n  background: #E8EEF1;\n}\n.heading[data-v-27d9b80a] {\n  color: #E8EEF1;\n  background-color: #1E3D58;\n  padding: 5px;\n  margin-top: 30px;\n  margin-bottom: 20px;\n  border-color: #ccc;\n  border-radius: 5px;\n  box-shadow: -3px 3px 4px 0px #1E3D58;\n}\n#title[data-v-27d9b80a] {\n    text-align: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2256,7 +2256,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.serie[data-v-1d1939b8] {\n    display: flex;\n    justify-content: center;\n    align-content: center;\n    border-radius: 3px;\n}\n.item-serie[data-v-1d1939b8] {\n  display: block;\n  list-style: none;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.serie[data-v-1d1939b8] {\n  margin: 1px 3px;\n  align-items: center;\n  border-radius: 2px;\n}\n.item-serie[data-v-1d1939b8] {\n  width: 80%;\n  height: 100%;\n  display: flex;\n  list-style-type:none;\n}\n.item-serie li[data-v-1d1939b8] {\n  padding: 5px;\n  align-self: center;\n}\n.id-serie[data-v-1d1939b8] {\n  width: 50px;\n  margin-right: 15px;\n  text-align: right;\n  font-weight: bold;\n}\n.nome-serie[data-v-1d1939b8] {\n}\n.status-serie[data-v-1d1939b8] {\n  width: 120px;\n  margin: 2px 0;\n  background: #E8EEF1;\n  color: #3dd;\n  font-style: oblique;\n  margin-left: auto;\n  border-radius: 5px;\n  text-align: center;\n  box-shadow: inset -2px 2px 4px 0px #1E3D58;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2280,7 +2280,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.series[data-v-1e30e04a] {\n    background: #1E3D58;\n    padding: 5px;\n    margin-top: 5px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.series[data-v-1e30e04a] {\n  color: #E8EEF1;\n  background: #1E3D58;\n  align-content: center;\n  box-shadow: -2px 2px 4px 0px #111;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20445,7 +20445,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "heading" }, [
-      _c("h2", { attrs: { id: "title" } }, [_vm._v("Séries")])
+      _c("h2", { attrs: { id: "title" } }, [_vm._v("Minhas Séries")])
     ])
   }
 ]
@@ -20472,12 +20472,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "serie" }, [
-    _c("ul", { class: _vm.item - _vm.serie }, [
-      _c("li", [_vm._v(_vm._s(_vm.serie.id))]),
+    _c("ul", { staticClass: "item-serie" }, [
+      _c("li", { staticClass: "id-serie" }, [_vm._v(_vm._s(_vm.serie.id))]),
       _vm._v(" "),
-      _c("li", [_vm._v(_vm._s(_vm.serie.nome))]),
+      _c("li", { staticClass: "nome-serie" }, [_vm._v(_vm._s(_vm.serie.nome))]),
       _vm._v(" "),
-      _c("li", [_vm._v(_vm._s(_vm.serie.status))])
+      _c("li", { staticClass: "status-serie" }, [
+        _vm._v(_vm._s(_vm.serie.status))
+      ])
     ])
   ])
 }
