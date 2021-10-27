@@ -66,7 +66,24 @@ class SeriesController extends Controller
     if ($id === false) {
       return response('Not found', 404);
     }
-  }
+    $request->validate([
+        'nome' => 'min:5|string',
+        'status' => 'in:assistido,não-assistido'
+      ]);
+
+    $serie = Serie::find($id);
+    if (isset($request['nome'])) {
+          $serie->nome = $request['nome'];
+                                }
+          if (isset($request['status'])) {
+              $serie->status = $request['status'];
+        }
+              $serie->save();
+
+              return response('No Content', 204);
+      }
+
+
 
   public function status($id): Response
   {

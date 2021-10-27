@@ -77,4 +77,37 @@ class SerieTest extends TestCase
       $response = $this->json('GET', '/api/v1/serie/1');
       $response->assertStatus(200);
     }
+
+    public function test_series_update_serie_not_integer()
+    {
+      $response = $this->json('PATCH', '/api/v1/serie/a');
+      $response->assertStatus(404);
+    }
+
+    public function test_series_update_success() 
+    {
+      $data = [
+        'nome' => 'nome-serie-criada', 
+        'status' => 'assistido'
+      ];
+      $this->json('POST', '/api/v1/serie', $data);
+      $dataUpdate = [
+        'nome' => 'teste-update',
+        'status' => 'não-assistido'
+      ];
+      $resp = $this->json('PATCH', '/api/v1/serie/1', $dataUpdate);
+      $resp->assertStatus(204);
+    }
+
+    public function test_series_status_change() 
+    {
+      $data = [
+        'nome' => 'nome-serie-criada', 
+        'status' => 'assistido'
+      ];
+      $this->json('POST', '/api/v1/serie', $data);
+      $this->json('PUT', '/api/v1/serie/status/1'); 
+      $response = $this->json('GET', '/api/v1/serie/1');
+      $this->assertEquals('não-assitido', $response['status']);
+    }
 }
