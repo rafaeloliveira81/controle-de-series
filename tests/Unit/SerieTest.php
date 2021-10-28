@@ -78,12 +78,27 @@ class SerieTest extends TestCase
       $response->assertStatus(200);
     }
 
-    public function test_series_update_serie_not_integer()
+    public function test_series_update_id_not_integer()
     {
       $response = $this->json('PATCH', '/api/v1/serie/a');
       $response->assertStatus(404);
     }
 
+    public function test_series_update_invalid_input()
+    {
+      $data = [
+        'nome' => 'nome-serie-criada', 
+        'status' => 'assistido'
+      ];
+      $this->json('POST', '/api/v1/serie', $data);
+      $upData = [
+        'nome' => 'nom', 
+        'status' => 'Testeassistido'
+      ];
+
+      $response = $this->json('PATCH', '/api/v1/serie/1', $upData);
+      $response->assertStatus(422);
+    }
     public function test_series_update_success() 
     {
       $data = [
@@ -108,6 +123,25 @@ class SerieTest extends TestCase
       $this->json('POST', '/api/v1/serie', $data);
       $this->json('PUT', '/api/v1/serie/status/1'); 
       $response = $this->json('GET', '/api/v1/serie/1');
-      $this->assertEquals('não-assitido', $response['status']);
+      $this->assertEquals('não-assistido', $response['status']);
+      
+      $this->json('PUT', '/api/v1/serie/status/1'); 
+      $response = $this->json('GET', '/api/v1/serie/1');
+      $this->assertEquals('assistido', $response['status']);
+    }
+
+    public function test_series_delete_success()
+    {
+      $data = [
+        'nome' => 'nome-serie-criada', 
+        'status' => 'assistido'
+      ];
+      $this->json('POST', '/api/v1/serie', $data);
+      $resp = $this->json('DELETE', '/api/v1/serie/1');
+      $response = $this->json('GET', '/api/v1/serie/1');
+      $response->assertStatus(404);
+
+      $resp->assertStatus(200);
+
     }
 }

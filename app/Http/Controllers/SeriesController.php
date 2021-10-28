@@ -98,6 +98,7 @@ class SeriesController extends Controller
     else {
       $serie->status = 'não-assistido';
     }
+    $serie->save();
     return response('No Content', 204);
   }
 
