@@ -1,17 +1,26 @@
 <template>
-    <div class="series-container">
-        <div class="heading">
-            <h2 id="title">Minhas Séries</h2>
-            <!-- @ todo botão do formulário -->
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-md">
+                <a class="navbar-brand" href="#">Séries</a>
+            </div>
+        </nav>
+        <div class="series-container">
+            <div class="heading">
+                <h2 id="title">Minhas Séries</h2>
+                <form-series v-on:reloadlist="getSeries()" />
+            </div>
+            <list-view :series="series" />
         </div>
-        <list-view :series="series" />
     </div>
 </template>
 
 <script charset="utf-8">
 import listView from './listView'
+import formSeries from './formSeries'
 export default {
     components: {
+        formSeries,
         listView
     },
     data: function() {
@@ -42,7 +51,7 @@ export default {
 <style scoped>
 .series-container {
   font-family: Titillium Web, sans-serif;
-  width: 60%;
+  width: 90%;
   padding: 3px 50px;
   margin: auto;
   background: #E8EEF1;
@@ -50,7 +59,7 @@ export default {
 .heading {
   color: #E8EEF1;
   background-color: #1E3D58;
-  padding: 5px;
+  padding: 15px;
   margin-top: 30px;
   margin-bottom: 20px;
   border-color: #ccc;
@@ -59,6 +68,10 @@ export default {
 }
 #title {
     text-align: center;
+}
+.navbar {
+    background-color: #057DCD;
+    border-bottom: 1px solid darkblue;
 }
 </style>
         
