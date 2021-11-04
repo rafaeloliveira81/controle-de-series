@@ -100,3 +100,7 @@ export default {
         margin-bottom: 0px;
     }
 </style>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1fa7894ce3a1ee2a7096af7c45d4cad5ada525d7
