@@ -99,8 +99,5 @@ export default {
         align-content: center;
         margin-bottom: 0px;
     }
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> c238047bbabe340dc9038c91f9e5b1d1e3d3efbe
+
