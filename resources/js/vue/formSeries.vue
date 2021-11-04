@@ -13,6 +13,31 @@
             />
         </div>
         <div class="col-auto">
+            <label for="categoria" class="form-label">Categoria: </label>
+        </div>
+        <div class="col-auto">
+            <select v-model="serie.categoria" id="categoria" class="form-control">
+                <option disabled value="">Escolha uma categoria</option>
+                <option>Ação</option>
+                <option>Ficção</option>
+                <option>Terror</option>
+                <option>Comédia</option>
+                <option>Aventura</option>
+            </select>    
+        </div>
+        <div class="col-auto">
+            <label for="streaming" class="form-label">Streaming: </label>
+        </div>
+        <div class="col-auto">
+            <select v-model="serie.streaming" id="streaming" class="form-control">
+                <option disabled value="">Escolha um streaming</option>
+                <option>Netflix</option>
+                <option>HBO Max</option>
+                <option>Amazon Prime</option>
+                <option> Disney Plus</option>
+            </select>
+        </div>        
+        <div class="col-auto">
             <button class="btn btn-primary" @click="cadastrarSerie()">
                 Cadastrar
             </button>
@@ -25,7 +50,9 @@ export default {
     data: function () {
         return {
             serie: {
-                titulo: ""
+                titulo: "",
+                categoria: "",
+                streaming: "",
             }
         }
     },
@@ -35,10 +62,14 @@ export default {
                 return;
             }
             axios.post('api/v1/serie', {
-                nome: this.serie.titulo
+                nome: this.serie.titulo,
+                categoria: this.serie.categoria,
+                streaming: this.serie.streaming
             }).then( response => {
                     if (response.status == '201') {
                         this.serie.titulo = '';
+                        this.serie.categoria = "";
+                        this.serie.streaming = "";
                         this.$emit('reloadlist');
                     }
                 }) 
@@ -46,6 +77,15 @@ export default {
                     console.log(error);
                 })
         },
+        existeCampoVazio() {
+            if (this.serie.titulo == ''
+            || this.serie.categoria == '' 
+            || this.serie.streaming == ''
+            ){
+                return true;
+            }
+            return false;
+        }
     },
 }
 </script>
@@ -59,4 +99,4 @@ export default {
         align-content: center;
         margin-bottom: 0px;
     }
-</style>S
+</style>

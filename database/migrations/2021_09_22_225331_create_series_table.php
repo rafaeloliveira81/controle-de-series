@@ -16,6 +16,8 @@ class CreateSeriesTable extends Migration
         Schema::create('series', function (Blueprint $table) {
             $table->id();
             $table->string('nome')->nullable();
+            $table->string('categoria')->nullable();
+            $table->string('streaming')->nullable();
             $table->enum('status', ['assistido', 'não-assistido'])->default('não-assistido');
             $table->timestamps();
         });
