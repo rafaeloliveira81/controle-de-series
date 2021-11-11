@@ -7,12 +7,16 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Séries</h2>
-                    <form-series v-on:reloadlist="getSeries()"/>
+                    <form-series 
+                        v-on:reloadlist="getSeries()"
+                        :editarSerie="editarSerie"
+                    />
                 </div>
                 <div class="card-body">
                     <table-series 
                         :series="series" 
                         v-on:reloadlist="getSeries()"
+                        v-on:edit="editarId($event)"
                     />
                 </div>
             </div>    
@@ -31,6 +35,7 @@ export default {
     data: function() {
         return {
             series: [],
+            editarSerie: [],
         }
     },
     methods: {
@@ -42,6 +47,15 @@ export default {
                 }) 
                 .catch( error => {
                     console.log(error);
+                })
+        },
+        editarId(id) {
+            axios.get('api/v1/serie/' + id)
+                .then ( response => {
+                    this.editarSerie = response.data
+                })
+                .catch ( error => {
+                    console.log (error)
                 })
         },
     },

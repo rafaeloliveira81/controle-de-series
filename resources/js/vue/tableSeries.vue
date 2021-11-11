@@ -8,6 +8,7 @@
                     <th scope="col">Categoria</th>
                     <th scope="col">Streaming</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +18,11 @@
                     <td>{{ serie.categoria }}</td>
                     <td>{{ serie.streaming}}</td>
                     <td>{{ serie.status }}</td>
+                    <td>
+                        <a v-on:click="$emit('edit', serie.id)">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -25,7 +31,7 @@
 
 <script>
 export default {
-    props: ['series'],
+    props: [ 'series' ],
 }
 </script>
 

@@ -5,7 +5,7 @@
         </div>
         <div class="col-auto">
             <input 
-                v-model="serie.titulo" 
+                v-model="editarSerie.nome" 
                 id="titulo"
                 placeholder="Digite o título da série"
                 class="form-control"
@@ -16,7 +16,7 @@
             <label for="categoria" class="form-label">Categoria: </label>
         </div>
         <div class="col-auto">
-            <select v-model="serie.categoria" id="categoria" class="form-control">
+            <select v-model="editarSerie.categoria" id="categoria" class="form-control">
                 <option disabled value="">Escolha uma categoria</option>
                 <option>Ação</option>
                 <option>Ficção</option>
@@ -29,17 +29,20 @@
             <label for="streaming" class="form-label">Streaming: </label>
         </div>
         <div class="col-auto">
-            <select v-model="serie.streaming" id="streaming" class="form-control">
+            <select v-model="editarSerie.streaming" id="streaming" class="form-control">
                 <option disabled value="">Escolha um streaming</option>
                 <option>Netflix</option>
                 <option>HBO Max</option>
                 <option>Amazon Prime</option>
-                <option> Disney Plus</option>
+                <option>Disney Plus</option>
             </select>
         </div>        
         <div class="col-auto">
             <button class="btn btn-primary" @click="cadastrarSerie()">
                 Cadastrar
+            </button>
+            <button class="btn btn-primary" @click="editar(editarSerie)">
+                Editar
             </button>
         </div>
     </div>
@@ -47,18 +50,19 @@
 
 <script>
 export default {
+    props: [ 'editarSerie' ],
     data: function () {
         return {
             serie: {
                 titulo: "",
                 categoria: "",
                 streaming: "",
-            }
+            },
         }
     },
     methods: {
         cadastrarSerie() {
-            if (this.serie.titulo == '') {
+            if (existeCampoVazio() === true) {
                 return;
             }
             axios.post('api/v1/serie', {
@@ -85,6 +89,9 @@ export default {
                 return true;
             }
             return false;
+        },
+        editar(eSerie) {
+            alert(eSerie.id)
         }
     },
 }
@@ -100,7 +107,3 @@ export default {
         margin-bottom: 0px;
     }
 </style>
-<<<<<<< HEAD
-=======
-
->>>>>>> 1fa7894ce3a1ee2a7096af7c45d4cad5ada525d7
