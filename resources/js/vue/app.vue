@@ -9,6 +9,7 @@
                     <h2>Séries</h2>
                     <form-series 
                         v-on:reloadlist="getSeries()"
+                        v-on:limpar="limpar()"
                         :editarSerie="editarSerie"
                     />
                 </div>
@@ -58,6 +59,10 @@ export default {
                     console.log (error)
                 })
         },
+        limpar() {
+            this.editarSerie = []
+            alert("Limpo")
+        }
     },
     created() {
         this.getSeries();

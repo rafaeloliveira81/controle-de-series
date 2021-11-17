@@ -20,7 +20,6 @@ class SeriesController extends Controller
 
   public function store(Request $request): Response
   {
-    $request->validate(['nome' => 'required|min:5']);
     $serieCadastrada = Serie::create($request->all());
     return response($serieCadastrada, 201);
   }
@@ -66,22 +65,23 @@ class SeriesController extends Controller
     if ($id === false) {
       return response('Not found', 404);
     }
-    $request->validate([
-        'nome' => 'min:5|string',
-        'status' => 'in:assistido,não-assistido'
-      ]);
-
     $serie = Serie::find($id);
     if (isset($request['nome'])) {
           $serie->nome = $request['nome'];
-                                }
-          if (isset($request['status'])) {
+    }
+    if (isset($request['categoria'])) {
+          $serie->categoria = $request['categoria'];
+    }
+    if (isset($request['streaming'])) {
+          $serie->streaming = $request['streaming'];
+    }
+    if (isset($request['status'])) {
               $serie->status = $request['status'];
-        }
-              $serie->save();
+    }
+    $serie->save();
 
-              return response('No Content', 204);
-      }
+    return response('No Content', 204);
+  }
 
 
 

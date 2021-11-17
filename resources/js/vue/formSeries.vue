@@ -30,7 +30,7 @@
         </div>
         <div class="col-auto">
             <select v-model="editarSerie.streaming" id="streaming" class="form-control">
-                <option disabled value="">Escolha um streaming</option>
+                <option disabled value="" selected>Escolha um streaming</option>
                 <option>Netflix</option>
                 <option>HBO Max</option>
                 <option>Amazon Prime</option>
@@ -38,11 +38,11 @@
             </select>
         </div>        
         <div class="col-auto">
-            <button class="btn btn-primary" @click="cadastrarSerie()">
-                Cadastrar
-            </button>
-            <button class="btn btn-primary" @click="editar(editarSerie)">
+            <button v-if="editarSerie.nome" class="btn btn-primary" v-on:click="editar(editarSerie); $emit('limpar')">
                 Editar
+            </button>
+            <button v-else class="btn btn-primary" @click="cadastrarSerie()">
+                Cadastrar
             </button>
         </div>
     </div>
@@ -62,16 +62,17 @@ export default {
     },
     methods: {
         cadastrarSerie() {
-            if (existeCampoVazio() === true) {
+            this.serie = this.editarSerie
+            if (this.existeCampoVazio() === true) {
                 return;
             }
             axios.post('api/v1/serie', {
-                nome: this.serie.titulo,
+                nome: this.serie.nome,
                 categoria: this.serie.categoria,
                 streaming: this.serie.streaming
             }).then( response => {
                     if (response.status == '201') {
-                        this.serie.titulo = '';
+                        this.serie.nome = '';
                         this.serie.categoria = "";
                         this.serie.streaming = "";
                         this.$emit('reloadlist');
@@ -82,7 +83,7 @@ export default {
                 })
         },
         existeCampoVazio() {
-            if (this.serie.titulo == ''
+            if (this.serie.nome == ''
             || this.serie.categoria == '' 
             || this.serie.streaming == ''
             ){
@@ -91,9 +92,29 @@ export default {
             return false;
         },
         editar(eSerie) {
-            alert(eSerie.id)
+            axios.patch('api/v1/serie/'+ eSerie.id, {
+                nome: eSerie.nome,
+                categoria: eSerie.categoria,
+                streaming: eSerie.streaming
+            })
+            .then (resp => {
+                if (resp.status == '204') {
+                    this.editarSerie.nome = ''
+                    this.editarSerie.categoria = ''
+                    this.editarSerie.streaming = ''
+                    this.$emit('reloadlist')
+                }
+            })
+            .catch (error => {
+                console.log(error)
+            })
         }
     },
+    created() {
+        this.editarSerie.nome = ''
+        this.editarSerie.categoria = ''
+        this.editarSerie.streaming = ''
+    }
 }
 </script>
 

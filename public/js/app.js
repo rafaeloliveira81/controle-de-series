@@ -2093,6 +2093,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 _tableSeries_vue__WEBPACK_IMPORTED_MODULE_0__["default"];
 
 
@@ -2126,6 +2127,10 @@ _tableSeries_vue__WEBPACK_IMPORTED_MODULE_0__["default"];
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    limpar: function limpar() {
+      this.editarSerie = [];
+      alert("Limpo");
     }
   },
   created: function created() {
@@ -2211,17 +2216,21 @@ __webpack_require__.r(__webpack_exports__);
     cadastrarSerie: function cadastrarSerie() {
       var _this = this;
 
-      if (existeCampoVazio() === true) {
+      this.serie = this.editarSerie; //this.serie.nome = this.editarSerie.nome
+      //this.serie.categoria = this.editarSerie.categoria 
+      //this.serie.streaming = this.editarSerie.streaming 
+
+      if (this.existeCampoVazio() === true) {
         return;
       }
 
       axios.post('api/v1/serie', {
-        nome: this.serie.titulo,
+        nome: this.serie.nome,
         categoria: this.serie.categoria,
         streaming: this.serie.streaming
       }).then(function (response) {
         if (response.status == '201') {
-          _this.serie.titulo = '';
+          _this.serie.nome = '';
           _this.serie.categoria = "";
           _this.serie.streaming = "";
 
@@ -2232,15 +2241,36 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     existeCampoVazio: function existeCampoVazio() {
-      if (this.serie.titulo == '' || this.serie.categoria == '' || this.serie.streaming == '') {
+      if (this.serie.nome == '' || this.serie.categoria == '' || this.serie.streaming == '') {
         return true;
       }
 
       return false;
     },
     editar: function editar(eSerie) {
-      alert(eSerie.id);
+      var _this2 = this;
+
+      axios.patch('api/v1/serie/' + eSerie.id, {
+        nome: eSerie.nome,
+        categoria: eSerie.categoria,
+        streaming: eSerie.streaming
+      }).then(function (resp) {
+        if (resp.status == '204') {
+          _this2.editarSerie.nome = '';
+          _this2.editarSerie.categoria = '';
+          _this2.editarSerie.streaming = '';
+
+          _this2.$emit('reloadlist');
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
+  },
+  created: function created() {
+    this.editarSerie.nome = '';
+    this.editarSerie.categoria = '';
+    this.editarSerie.streaming = '';
   }
 });
 
@@ -20508,6 +20538,9 @@ var render = function() {
               on: {
                 reloadlist: function($event) {
                   return _vm.getSeries()
+                },
+                limpar: function($event) {
+                  return _vm.limpar()
                 }
               }
             })
@@ -20689,7 +20722,7 @@ var render = function() {
           }
         },
         [
-          _c("option", { attrs: { disabled: "", value: "" } }, [
+          _c("option", { attrs: { disabled: "", value: "", selected: "" } }, [
             _vm._v("Escolha um streaming")
           ]),
           _vm._v(" "),
@@ -20705,31 +20738,32 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-auto" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          on: {
-            click: function($event) {
-              return _vm.cadastrarSerie()
-            }
-          }
-        },
-        [_vm._v("\n            Cadastrar\n        ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          on: {
-            click: function($event) {
-              return _vm.editar(_vm.editarSerie)
-            }
-          }
-        },
-        [_vm._v("\n            Editar\n        ")]
-      )
+      _vm.editarSerie.nome
+        ? _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              on: {
+                click: function($event) {
+                  _vm.editar(_vm.editarSerie)
+                  _vm.$emit("limpar")
+                }
+              }
+            },
+            [_vm._v("\n            Editar\n        ")]
+          )
+        : _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              on: {
+                click: function($event) {
+                  return _vm.cadastrarSerie()
+                }
+              }
+            },
+            [_vm._v("\n            Cadastrar\n        ")]
+          )
     ])
   ])
 }
