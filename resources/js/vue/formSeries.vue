@@ -38,7 +38,7 @@
             </select>
         </div>        
         <div class="col-auto">
-            <button v-if="editarSerie.nome" class="btn btn-primary" v-on:click="editar(editarSerie); $emit('limpar')">
+            <button v-if="editarSerie.id" class="btn btn-primary" v-on:click="editar(editarSerie); $emit('limpar')">
                 Editar
             </button>
             <button v-else class="btn btn-primary" @click="cadastrarSerie()">
