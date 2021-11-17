@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="navbar navbar-dark bg-dark">
-            <a href="#" class="navbar-brand">Séries</a>
+            <a id="top" class="navbar-brand">Séries</a>
         </nav>
         <div class="container-fluid">
             <div class="card">
@@ -58,10 +58,10 @@ export default {
                 .catch ( error => {
                     console.log (error)
                 })
+
         },
         limpar() {
             this.editarSerie = []
-            alert("Limpo")
         }
     },
     created() {
