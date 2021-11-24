@@ -3,6 +3,13 @@
         <nav class="navbar navbar-dark bg-dark">
             <a id="top" class="navbar-brand">Séries</a>
         </nav>
+        <modal-series  
+            v-if="showModal" 
+            :deletar="del"
+            @close="showModal = false"
+            v-on:reloadlist="getSeries()"
+        />
+        
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
@@ -18,6 +25,7 @@
                         :series="series" 
                         v-on:reloadlist="getSeries()"
                         v-on:edit="editarId($event)"
+                        v-on:deletar="deletar($event)"
                     />
                 </div>
             </div>    
@@ -28,15 +36,19 @@
 <script>tableSeries
 import formSeries from './formSeries.vue';
 import tableSeries from './tableSeries.vue';
+import modalSeries from './modalSeries.vue';
 export default {
     components: {
         formSeries,
-        tableSeries
+        tableSeries,
+        modalSeries
     },
     data: function() {
         return {
             series: [],
             editarSerie: [],
+            del: 0,
+            showModal: false,
         }
     },
     methods: {
@@ -59,6 +71,10 @@ export default {
                     console.log (error)
                 })
 
+        },
+        deletar(id) {
+            this.del = id
+            this.showModal = true
         },
         limpar() {
             this.editarSerie = []

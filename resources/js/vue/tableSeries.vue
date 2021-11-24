@@ -22,7 +22,7 @@
                         <a href="#top" v-on:click="$emit('edit', serie.id)">
                             <i class="fa fa-pencil-square-o"> </i>
                         </a>
-                        <a v-on:click="deleteSerie(serie)">
+                        <a v-on:click="$emit('deletar', serie.id)">
                             <i class="fa fa-trash-o"> </i>
                         </a>
                         <a v-on:click="atualizaSerie(serie.id)">
@@ -39,21 +39,6 @@
 export default {
     props: [ 'series' ],
     methods: {
-        deleteSerie(serie) {
-            let del = confirm("Deseja realmente excluir a Série: " + serie.nome + "?")
-            if (del) {
-                axios.delete('api/v1/serie/' + serie.id)
-                    .then ( resp => {
-                        if (resp.status == '200') {
-                            alert("Série excluida")
-                            this.$emit('reloadlist')
-                        }
-                    })
-                    .catch (error => {
-                        console.log(error)
-                    })
-            }
-        },
         atualizaSerie(id) {
             axios.put('api/v1/serie/status/' + id)
                 .then (resp => {
