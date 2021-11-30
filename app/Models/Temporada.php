@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Temporada extends Model
 {
     use HasFactory;
+    protected $fillable = ['serie_id', 'nome'];
 
-    public function serie()
+    public function serie(): BelongsTo
     {
         return $this->belongsTo(Serie::class);
     }

@@ -11,7 +11,7 @@ class Serie extends Model
     use HasFactory;
     protected $fillable = ['nome', 'categoria', 'streaming', 'status'];
 
-    public function temporadas()
+    public function temporadas(): HasMany
     {
         return $this->HasMany(Temporada::class);
     }

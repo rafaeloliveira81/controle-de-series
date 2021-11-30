@@ -28,6 +28,9 @@
                         <a v-on:click="atualizaSerie(serie.id)">
                             <i class="fa fa-check-square-o"></i>
                         </a>
+                        <a v-on:click="">
+                            <i class="fa fa-film"></i>
+                        </a>
                     </td>
                 </tr>
             </tbody>

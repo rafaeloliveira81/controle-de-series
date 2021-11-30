@@ -2,75 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Temporada\IndexTemporadaRequest;
+use App\Http\Requests\Temporada\StoreTemporadaRequest;
+use App\Http\Requests\Temporada\UpdateTemporadaRequest;
 use App\Models\Temporada;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class TemporadasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(): Response
+    public function index(IndexTemporadaRequest $request): Response
     {
-        return response(Temporada::all(), Response::HTTP_OK);
+        dd($request);
+        $where = [ 'serie_id' => $request[ 'serie_id' ]];
+        $temporadas = Temporada::where($where)->get();
+        return response($temporadas, Response::HTTP_OK);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreTemporadaRequest $request): Response
     {
-        //
+        $temporadaCadastrada = Temporada::create($request->all());
+        return response($temporadaCadastrada, Response::HTTP_CREATED);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(int $id): Response
     {
-        //
+        $temporada = Temporada::findOrFail($id);
+        return response($temporada, Response::HTTP_OK);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(UpdateTemporadaRequest $request, int $id): Response
     {
-        //
+        $temporada = Temporada::find($id);
+        $temporada->fill($request->all());
+        $temporada->update();
+        return response('No Content', Response::HTTP_NO_CONTENT);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(int $id): Response
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        Temporada::destroy($id);
+        return response('OK', Response::HTTP_OK);
     }
 }

@@ -8,14 +8,9 @@ use Illuminate\Http\Response;
 
 class SeriesController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
   public function index(): Response
   {
-      return response(Serie::all(), 200);
+      return response(Serie::all(), Response::HTTP_OK);
   }
 
   public function store(Request $request): Response
@@ -24,12 +19,6 @@ class SeriesController extends Controller
     return response($serieCadastrada, 201);
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function show($id): Response
   {
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -41,24 +30,11 @@ class SeriesController extends Controller
     return response($serie, 200);
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function edit($id)
   {
       //
   }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function update(Request $request, $id)
   {
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -102,12 +78,6 @@ class SeriesController extends Controller
     return response('No Content', 204);
   }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function destroy($id): Response
   {
     $id = filter_var($id, FILTER_VALIDATE_INT);
