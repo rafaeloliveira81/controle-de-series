@@ -16,7 +16,7 @@
                     <th scope="row">{{ serie.id }}</th>
                     <td>{{ serie.nome }}</td>
                     <td>{{ serie.categoria }}</td>
-                    <td>{{ serie.streaming}}</td>
+                    <td>{{ serie.streaming }}</td>
                     <td>{{ serie.status }}</td>
                     <td>
                         <a href="#top" v-on:click="$emit('edit', serie.id)">
@@ -28,7 +28,7 @@
                         <a v-on:click="atualizaSerie(serie.id)">
                             <i class="fa fa-check-square-o"></i>
                         </a>
-                        <a v-on:click="">
+                        <a v-on:click="$emit('listTemporadas', serie)">
                             <i class="fa fa-film"></i>
                         </a>
                     </td>

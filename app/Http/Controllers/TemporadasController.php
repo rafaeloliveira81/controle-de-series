@@ -13,7 +13,6 @@ class TemporadasController extends Controller
 {
     public function index(IndexTemporadaRequest $request): Response
     {
-        dd($request);
         $where = [ 'serie_id' => $request[ 'serie_id' ]];
         $temporadas = Temporada::where($where)->get();
         return response($temporadas, Response::HTTP_OK);
