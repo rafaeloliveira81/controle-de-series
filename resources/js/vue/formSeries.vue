@@ -17,12 +17,15 @@
         </div>
         <div class="col-auto">
             <select v-model="editarSerie.categoria" id="categoria" class="form-control">
-                <option disabled value="">Escolha uma categoria</option>
+                <option value="" disabled selected>Escolha uma categoria</option>
                 <option>Ação</option>
-                <option>Ficção</option>
-                <option>Terror</option>
-                <option>Comédia</option>
                 <option>Aventura</option>
+                <option>Comédia</option>
+                <option>Drama</option>
+                <option>Ficção</option>
+                <option>Romance</option>
+                <option>Suspense</option>
+                <option>Terror</option>
             </select>    
         </div>
         <div class="col-auto">
@@ -72,9 +75,7 @@ export default {
                 streaming: this.serie.streaming
             }).then( response => {
                     if (response.status == '201') {
-                        this.serie.nome = '';
-                        this.serie.categoria = "";
-                        this.serie.streaming = "";
+                        this.$emit('limpar');
                         this.$emit('reloadlist');
                     }
                 }) 
@@ -84,7 +85,7 @@ export default {
         },
         existeCampoVazio() {
             if (this.serie.nome == ''
-            || this.serie.categoria == '' 
+            || this.serie.categoria == ''
             || this.serie.streaming == ''
             ){
                 return true;
@@ -99,9 +100,7 @@ export default {
             })
             .then (resp => {
                 if (resp.status == '204') {
-                    this.editarSerie.nome = ''
-                    this.editarSerie.categoria = ''
-                    this.editarSerie.streaming = ''
+                    this.$emit('limpar')
                     this.$emit('reloadlist')
                 }
             })
