@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 <tr v-for="(temporada, index) in temporadas" :key="index">
-                    <th scope="row">{{ temporada.id }}</th>
+                    <td scope="row">{{ temporada.id }}</td>
                     <td>{{ temporada.nome }}</td>
                     <td>
                         <a v-on:click="editarTemporada(temporada.id)">
@@ -33,7 +33,7 @@
                         <a v-on:click="$emit('delTemporada', temporada.id)">
                             <i class="fa fa-trash-o"> </i>
                         </a>
-                        <a>
+                        <a v-on:click="$emit('listEpisodios', temporada)">
                             <i class="fa fa-tv"></i>
                         </a>
                     </td>

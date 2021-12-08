@@ -6,7 +6,6 @@ use App\Http\Requests\Temporada\IndexTemporadaRequest;
 use App\Http\Requests\Temporada\StoreTemporadaRequest;
 use App\Http\Requests\Temporada\UpdateTemporadaRequest;
 use App\Models\Temporada;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class TemporadasController extends Controller

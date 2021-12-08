@@ -12,7 +12,7 @@ class Serie extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = ['nome', 'categoria', 'streaming', 'status'];
 
-    public function temporadas(): HasMany
+    public function temporada(): HasMany
     {
         return $this->HasMany(Temporada::class);
     }
